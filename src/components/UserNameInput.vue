@@ -1,18 +1,20 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <v-form ref="form">
-        <v-row align-content="center" class="align-center">
-          <v-col align-self="center">
+      <v-form ref="form" @submit.prevent="updateName" autocomplete="off">
+        <v-row class="flex-nowrap">
+          <v-col class="flex-shrink-1" align-self="center" cols="12">
             <v-text-field
                 name="name"
                 v-model="name"
                 :rules="rules"
+                :disabled="disabled"
                 placeholder="Введите ваше имя"
+                full-width
             />
           </v-col>
-          <v-col align-self="center">
-            <v-btn @click="updateName">Ок</v-btn>
+          <v-col class="mb-5" align-self="end">
+            <v-btn type="submit" color="primary" :disabled="disabled">Войти</v-btn>
           </v-col>
         </v-row>
       </v-form>
@@ -20,17 +22,17 @@
   </v-row>
 </template>
 
-<style scoped>
-</style>
-
 <script>
 import Vue from 'vue'
-import {Component, Ref, Watch} from "@/lib/decorators";
+import {Component, Prop, Ref, Watch} from "@/lib/decorators";
 import {useStore} from "@/lib/store";
 import {validation} from "@/lib/validation";
 
 @Component
 class UserNameInput extends Vue {
+  @Prop({type: Boolean, default: false})
+  disabled
+
   @Ref("form")
   form
 
@@ -38,7 +40,15 @@ class UserNameInput extends Vue {
 
   config = useStore(this.$store).config
 
+  room = useStore(this.$store).room
+
+  rooms = useStore(this.$store).rooms
+
   name = ""
+
+  get disabled() {
+    return this.room.loading || this.rooms.loading || this.room.error || this.disabled
+  }
 
   @Watch('form.errorBag')
   checkValidation(value) {

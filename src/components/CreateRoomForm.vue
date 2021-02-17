@@ -1,20 +1,22 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <v-form ref="form">
+      <v-form ref="form" @submit.prevent="createRoom" autocomplete="off">
         <v-text-field
             name="room"
             v-model="roomValue"
             :rules="[rules.required, rules.maxRoomNameLength]"
+            :disabled="disabled"
             placeholder="Название комнаты"
         />
         <v-text-field
             name="message"
             v-model="message"
             :rules="[rules.required, rules.maxMessageLength]"
+            :disabled="disabled"
             placeholder="Сообщение"
         />
-        <v-btn @click="createRoom">Создать</v-btn>
+        <v-btn type="submit" color="primary" :disabled="disabled">Создать</v-btn>
       </v-form>
     </v-col>
   </v-row>
@@ -33,6 +35,8 @@ class CreateRoomForm extends Vue {
 
   room = useStore(this.$store).room
 
+  rooms = useStore(this.$store).rooms
+
   user = useStore(this.$store).user
 
   config = useStore(this.$store).config
@@ -40,6 +44,10 @@ class CreateRoomForm extends Vue {
   roomValue = ""
 
   message = ""
+
+  get disabled() {
+    return this.rooms.loading || this.rooms.error
+  }
 
   get rules() {
     return {

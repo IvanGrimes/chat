@@ -1,13 +1,28 @@
 <template>
-  <div v-if="user.name">
-    <v-form ref="form">
-      <v-text-field name="message" v-model="message" :rules="rules" />
-      <v-btn @click="sendMessage">Отправить</v-btn>
-    </v-form>
-  </div>
-  <div v-else>
-    <user-name-input />
-  </div>
+  <v-row>
+    <v-col cols="12">
+      <v-form v-if="user.name" ref="form" @submit.prevent="sendMessage" autocomplete="off">
+        <v-row class="align-end flex-nowrap">
+          <v-col class="flex-shrink-1" cols="12">
+            <v-textarea
+                name="message"
+                v-model="message"
+                :rules="rules"
+                placeholder="Введите ваше сообщение"
+                height="120px"
+                :disabled="this.room.loading"
+                full-width
+                no-resize
+            />
+          </v-col>
+          <v-col class="mb-5">
+            <v-btn type="submit" color="primary" :disabled="this.room.loading">Отправить</v-btn>
+          </v-col>
+        </v-row>
+      </v-form>
+      <user-name-input v-else />
+    </v-col>
+  </v-row>
 </template>
 
 <script>

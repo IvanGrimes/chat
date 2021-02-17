@@ -22,6 +22,12 @@ export class Room {
   @State()
   history = []
 
+  @State()
+  loading = false
+
+  @State()
+  error = null
+
   @Mutation()
   pushHistory(item) {
     this.history.push(item)
@@ -37,8 +43,21 @@ export class Room {
     this.history = history
   }
 
+  @Mutation()
+  updateLoading(loading) {
+    this.loading = loading
+  }
+
+  @Mutation()
+  updateError(error) {
+    this.error = error
+  }
+
   @Action()
   async get(roomId) {
+    this.updateError(null)
+    this.updateLoading(true)
+
     try {
       const fromCache = this.cache[roomId]
 
@@ -54,7 +73,10 @@ export class Room {
       }
     } catch (e) {
       console.log('room/get', e)
+      this.updateError('При загрузке истории сообщение произошла ошибка')
     }
+
+    this.updateLoading(false)
   }
 
   @Action()

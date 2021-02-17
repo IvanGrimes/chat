@@ -9,8 +9,5 @@
 <script>
 import DefaultLayout from '@/layouts/Default'
 
-// @todo: редирект с создания комнаты, если нет имени
-// @todo: skeleton
-// @todo: верстка
 export default { components: { DefaultLayout } }
 </script>
