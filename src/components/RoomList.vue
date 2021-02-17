@@ -22,7 +22,7 @@
         </template>
       </div>
       <div v-else-if="rooms.error" class="text-caption">{{ rooms.error }}</div>
-      <v-list v-else class="list fill-height overflow-auto" three-line>
+      <v-list v-else :class="[user.name && 'authList', 'list overflow-auto']" three-line>
         <template v-for="(item, index) in rooms.list">
           <v-divider :key="index"></v-divider>
           <v-list-item :key="item.name" class="item" ripple :to="`/room/${item.name}`">
@@ -43,8 +43,16 @@
 </template>
 
 <style scoped>
+.list {
+  height: calc(100% - 60px);
+}
+
 .list > *:last-child {
   padding-bottom: 32px;
+}
+
+.authList {
+  height: calc(100% - 140px) !important;
 }
 
 .item {
