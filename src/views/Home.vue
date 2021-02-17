@@ -1,12 +1,9 @@
 <template>
-  <div><room-list /></div>
+  <div />
 </template>
 
 <script>
-import RoomList from '@/components/RoomList'
-
 export default {
   name: 'Home',
-  components: {RoomList}
 }
 </script>

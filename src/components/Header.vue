@@ -1,10 +1,7 @@
 <template>
-  <v-row>
-    <v-col cols="12">
-      <user-name-input v-if="!user.name" />
-      <div v-else>{{user.name}}</div>
-    </v-col>
-  </v-row>
+  <v-toolbar>
+    <v-toolbar-title>Gypsy chat</v-toolbar-title>
+  </v-toolbar>
 </template>
 
 <style scoped>
@@ -14,10 +11,9 @@
 import Vue from 'vue'
 import {Component} from "@/lib/decorators";
 import {useStore} from "@/lib/store";
-import UserNameInput from './UserNameInput'
 
-@Component({ components: {UserNameInput} })
-class UserBar extends Vue {
+@Component
+class Header extends Vue {
   user = useStore(this.$store).user
 
   updateName(ev) {
@@ -25,5 +21,5 @@ class UserBar extends Vue {
   }
 }
 
-export default UserBar
+export default Header
 </script>

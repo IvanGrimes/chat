@@ -1,14 +1,16 @@
 <template>
-  <v-container fluid>
-    <div><user-bar /></div>
-    <div>
-      <router-view/>
-    </div>
-  </v-container>
+  <v-app class="fill-height">
+    <default-layout>
+      <router-view />
+    </default-layout>
+  </v-app>
 </template>
 
 <script>
-import UserBar from '@/components/UserBar'
+import DefaultLayout from '@/layouts/Default'
 
-export default { components: { UserBar } }
+// @todo: редирект с создания комнаты, если нет имени
+// @todo: skeleton
+// @todo: верстка
+export default { components: { DefaultLayout } }
 </script>

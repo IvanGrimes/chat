@@ -1,6 +1,6 @@
 <template>
-  <v-row>
-    <v-col cols="12">
+  <v-row ref="wrapper" class="overflow-auto">
+    <v-col class="fill-height" cols="12">
       <v-list two-line>
         <template v-for="(item, index) in room.history">
           <v-divider :key="index"></v-divider>
@@ -30,13 +30,16 @@
 
 <script>
 import Vue from 'vue'
-import {Component, Prop, Watch} from "@/lib/decorators";
+import {Component, Prop, Ref, Watch} from "@/lib/decorators";
 import {useStore} from "@/lib/store";
 
 @Component
 class Room extends Vue {
   @Prop({ type: String, required: true })
   id
+
+  @Ref('wrapper')
+  wrapper
 
   room = useStore(this.$store).room
 
@@ -53,6 +56,15 @@ class Room extends Vue {
     await this.room.get(this.id)
 
     this.loading = false
+  }
+
+  @Watch('room.history')
+  scrollBottom() {
+      this.$nextTick(() => {
+        if (this.wrapper) {
+          this.wrapper.scrollTop = this.wrapper.scrollHeight
+        }
+      })
   }
 }
 

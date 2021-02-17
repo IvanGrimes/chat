@@ -2,13 +2,19 @@
   <v-row>
     <v-col cols="12">
       <v-form ref="form">
-        <v-text-field
-            name="name"
-            v-model="name"
-            :rules="rules"
-            placeholder="Введите ваше имя"
-        />
-        <v-btn @click="updateName">Ок</v-btn>
+        <v-row align-content="center" class="align-center">
+          <v-col align-self="center">
+            <v-text-field
+                name="name"
+                v-model="name"
+                :rules="rules"
+                placeholder="Введите ваше имя"
+            />
+          </v-col>
+          <v-col align-self="center">
+            <v-btn @click="updateName">Ок</v-btn>
+          </v-col>
+        </v-row>
       </v-form>
     </v-col>
   </v-row>

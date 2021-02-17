@@ -1,14 +1,7 @@
 <template>
   <div>
-    <v-row>
-      <v-col cols="4">
-        <room-list />
-      </v-col>
-      <v-col cols="8">
-        <create-room-form v-if="this.user.name" />
-        <user-name-input v-else />
-      </v-col>
-    </v-row>
+    <create-room-form v-if="this.user.name" />
+    <user-name-input v-else />
   </div>
 </template>
 

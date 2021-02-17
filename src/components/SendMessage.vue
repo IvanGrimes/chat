@@ -6,7 +6,6 @@
     </v-form>
   </div>
   <div v-else>
-    <div>Прежде чем отправлять сообщения укажите свое имя</div>
     <user-name-input />
   </div>
 </template>

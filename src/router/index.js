@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Home from '@/views/Home'
+import CreateRoom from '@/views/CreateRoom'
+import Room from '@/views/Room'
 
 Vue.use(VueRouter)
 
@@ -7,17 +10,17 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
+    component: Home
   },
   {
     path: '/room/create',
     name: 'CreateRoom',
-    component: () => import(/* webpackChunkName: "createRoom" */ '../views/CreateRoom')
+    component: CreateRoom,
   },
   {
     path: '/room/:id',
     name: 'Room',
-    component: () => import(/* webpackChunkName: "room" */ '../views/Room')
+    component: Room
   },
 ]
 

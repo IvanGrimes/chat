@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols="12">
       <v-btn v-if="user.name" to="/room/create">Создать комнату</v-btn>
-      <v-list two-line>
+      <v-list class="list" two-line>
         <template v-for="(item, index) in rooms.list">
           <v-divider :key="index"></v-divider>
           <v-list-item :key="item.name" class="item" ripple :to="`/room/${item.name}`">
@@ -18,6 +18,10 @@
 </template>
 
 <style scoped>
+.list > *:last-child {
+  padding-bottom: 32px;
+}
+
 .item {
   cursor: pointer;
 }
@@ -37,8 +41,9 @@
 import Vue from 'vue'
 import {Component} from "@/lib/decorators";
 import {useStore} from "@/lib/store";
+import UserNameInput from './UserNameInput'
 
-@Component
+@Component({ components: { UserNameInput } })
 class RoomList extends Vue {
   user = useStore(this.$store).user
 

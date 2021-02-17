@@ -1,16 +1,15 @@
 <template>
-  <div>
-    <v-row>
-      <v-col cols="4">
-        <room-list />
-      </v-col>
-      <v-col cols="8">
-        <room-component :id="id" />
-        <send-message :id="id" />
-      </v-col>
-    </v-row>
+  <div class="fill-height">
+    <room-component class="room" :id="id" />
+    <send-message :id="id" />
   </div>
 </template>
+
+<style scoped>
+.room {
+  height: calc(100% - 110px);
+}
+</style>
 
 <script>
 import Vue from 'vue'
