@@ -28,10 +28,8 @@ export class WS {
     const socket = new WebSocket(url);
 
     socket.onopen = () => {
-      this.ready = true;
-
       this.queue.forEach(data => {
-        if (this.ready) {
+        if (this.socket.readyState === this.socket.OPEN) {
           this.socket.send(data);
         }
       });
@@ -41,13 +39,7 @@ export class WS {
       this.emit(JSON.parse(ev.data));
     };
 
-    socket.onclose = () => {
-      this.ready = false;
-    };
-
     socket.onerror = () => {
-      this.ready = false;
-
       if (this.retryCount < 5) {
         this.retryCount += 1;
 
@@ -64,7 +56,7 @@ export class WS {
     const json = JSON.stringify(data);
     console.log(this);
 
-    if (this.ready) {
+    if (this.socket.readyState === this.socket.OPEN) {
       this.socket.send(json);
     } else {
       this.queue.push(json);
