@@ -2,9 +2,9 @@
   <v-row>
     <v-col cols="12">
       <v-list two-line>
-        <template v-for="item in room.history">
-          <v-divider :key="item.created"></v-divider>
-          <v-list-item :key="item.id">
+        <template v-for="(item, index) in room.history">
+          <v-divider :key="index"></v-divider>
+          <v-list-item :key="item.created + item.text">
             <v-list-item-content class="content">
               <v-list-item-title>{{item.sender.username}}</v-list-item-title>
               <v-list-item-subtitle>{{item.text}}</v-list-item-subtitle>

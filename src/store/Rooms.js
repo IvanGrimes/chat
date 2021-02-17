@@ -35,7 +35,7 @@ export class Rooms {
   async getList() {
     try {
       const list = await http.get('/rooms')
-        .then(({data}) => data.result.map(({last_message, ...item}) => ({id: item.name + last_message.text, lastMessage: last_message, ...item})))
+        .then(({data}) => data.result.map(({last_message, ...item}) => ({lastMessage: last_message, ...item})))
 
       this.updateList(list)
     } catch (e) {

@@ -6,6 +6,9 @@ export class Room {
   constructor() {
     RoomWS.getInstance().socket.on(data => {
       if (this.id === data.room) {
+        if (!this.cache[data.room]) {
+          this.cache[data.room] = data
+        }
         this.pushHistory(data)
       }
     })

@@ -1,10 +1,11 @@
 <template>
   <v-row>
     <v-col cols="12">
+      <v-btn v-if="user.name" to="/room/create">Создать комнату</v-btn>
       <v-list two-line>
-        <template v-for="item in rooms.list">
-          <v-divider :key="item.name"></v-divider>
-          <v-list-item :key="item.id" class="item" ripple :to="`/room/${item.name}`">
+        <template v-for="(item, index) in rooms.list">
+          <v-divider :key="index"></v-divider>
+          <v-list-item :key="item.name" class="item" ripple :to="`/room/${item.name}`">
             <v-list-item-content class="content">
               <v-list-item-title>{{item.name}}</v-list-item-title>
               <v-list-item-subtitle>{{item.lastMessage.sender.username}}: {{item.lastMessage.text}}</v-list-item-subtitle>
@@ -39,6 +40,8 @@ import {useStore} from "@/lib/store";
 
 @Component
 class RoomList extends Vue {
+  user = useStore(this.$store).user
+
   rooms = useStore(this.$store).rooms
 
   loading = false

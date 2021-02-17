@@ -1,7 +1,8 @@
 import {Rooms} from "./Rooms";
 import {Module} from "@/lib/decorators";
 import {Room} from "./Room";
-import {User} from "@/store/User";
+import {User} from "./User";
+import {Config} from './Config'
 
 export class Store {
   @Module()
@@ -12,4 +13,7 @@ export class Store {
 
   @Module()
   user = new User()
+
+  @Module()
+  config = new Config()
 }
