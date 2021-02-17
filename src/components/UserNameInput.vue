@@ -8,13 +8,13 @@
               name="name"
               v-model="name"
               :rules="rules"
-              :disabled="disabled"
+              :disabled="isDisabled"
               placeholder="Введите ваше имя"
               full-width
             />
           </v-col>
           <v-col class="mb-5" align-self="end">
-            <v-btn type="submit" color="primary" :disabled="disabled">Войти</v-btn>
+            <v-btn type="submit" color="primary" :disabled="isDisabled">Войти</v-btn>
           </v-col>
         </v-row>
       </v-form>
@@ -46,7 +46,7 @@ class UserNameInput extends Vue {
 
   name = '';
 
-  get disabled() {
+  get isDisabled() {
     return this.room.loading || this.rooms.loading || this.room.error || this.disabled;
   }
 
