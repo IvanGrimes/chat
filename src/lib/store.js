@@ -1,1 +1,1 @@
-export { useStore, createVuexStore } from 'vuex-simple'
+export { useStore, createVuexStore } from 'vuex-simple';

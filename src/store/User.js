@@ -1,11 +1,11 @@
-import { Mutation, State} from "@/lib/decorators";
+import { Mutation, State } from '@/lib/decorators';
 
 export class User {
   @State()
-  name = null
+  name = null;
 
   @Mutation()
   updateName(name) {
-    this.name = name
+    this.name = name;
   }
 }

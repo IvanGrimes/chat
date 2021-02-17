@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import HeaderComponent from "@/components/Header";
-import RoomList from '@/components/RoomList'
+import HeaderComponent from '@/components/Header';
+import RoomList from '@/components/RoomList';
 
-export default { components: { HeaderComponent, RoomList } }
+export default { components: { HeaderComponent, RoomList } };
 </script>

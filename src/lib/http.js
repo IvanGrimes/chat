@@ -1,5 +1,5 @@
-import axios from 'axios'
+import axios from 'axios';
 
 export const http = axios.create({
-  baseURL: 'https://nane.tada.team/api'
+  baseURL: 'https://nane.tada.team/api',
 });

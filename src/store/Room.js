@@ -1,90 +1,88 @@
-import {Action, Mutation, State} from "@/lib/decorators";
-import {http} from "@/lib/http";
-import {RoomWS} from "@/services/RoomWS";
+import { Action, Mutation, State } from '@/lib/decorators';
+import { http } from '@/lib/http';
+import { RoomWS } from '@/services/RoomWS';
 
 export class Room {
   constructor() {
     RoomWS.getInstance().socket.on(data => {
       if (this.id === data.room) {
         if (!this.cache[data.room]) {
-          this.cache[data.room] = data
+          this.cache[data.room] = data;
         }
-        this.pushHistory(data)
+        this.pushHistory(data);
       }
-    })
+    });
   }
 
-  cache = {}
+  cache = {};
 
   @State()
-  id = null
+  id = null;
 
   @State()
-  history = []
+  history = [];
 
   @State()
-  loading = false
+  loading = false;
 
   @State()
-  error = null
+  error = null;
 
   @Mutation()
   pushHistory(item) {
-    this.history.push(item)
+    this.history.push(item);
   }
 
   @Mutation()
   updateId(id) {
-    this.id = id
+    this.id = id;
   }
 
   @Mutation()
   updateHistory(history) {
-    this.history = history
+    this.history = history;
   }
 
   @Mutation()
   updateLoading(loading) {
-    this.loading = loading
+    this.loading = loading;
   }
 
   @Mutation()
   updateError(error) {
-    this.error = error
+    this.error = error;
   }
 
   @Action()
   async get(roomId) {
-    this.updateError(null)
-    this.updateLoading(true)
+    this.updateError(null);
+    this.updateLoading(true);
 
     try {
-      const fromCache = this.cache[roomId]
+      const fromCache = this.cache[roomId];
 
-      this.updateId(roomId)
+      this.updateId(roomId);
 
       if (fromCache) {
-        this.updateHistory(fromCache)
+        this.updateHistory(fromCache);
       } else {
-        const list = await http.get(`/rooms/${roomId}/history`).then(({data}) => data.result)
+        const list = await http.get(`/rooms/${roomId}/history`).then(({ data }) => data.result);
 
-        this.cache[roomId] = list
-        this.updateHistory(list)
+        this.cache[roomId] = list;
+        this.updateHistory(list);
       }
     } catch (e) {
-      console.log('room/get', e)
-      this.updateError('При загрузке истории сообщение произошла ошибка')
+      console.log('room/get', e);
+      this.updateError('При загрузке истории сообщение произошла ошибка');
     }
 
-    this.updateLoading(false)
+    this.updateLoading(false);
   }
 
   @Action()
   sendMessage({ username, message, room }) {
-    RoomWS
-      .getInstance()
-      .socket
-      .setUrl(`wss://nane.tada.team/ws?username=${username}`)
-      .send({ text: message, room: room || this.id })
+    RoomWS.getInstance()
+      .socket.setUrl(`wss://nane.tada.team/ws?username=${username}`)
+      .send({ text: message, room: room || this.id });
   }
 }

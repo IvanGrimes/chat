@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import { Store } from "./Store";
-import {createVuexStore} from "../lib/store";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import { Store } from './Store';
+import { createVuexStore } from '../lib/store';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-const rootStore = new Store()
+const rootStore = new Store();
 
-export default createVuexStore(rootStore, { strict: true })
+export default createVuexStore(rootStore, { strict: true });

@@ -16,10 +16,10 @@
           <v-list-item :key="item.created + item.text">
             <v-list-item-content class="content">
               <v-list-item-title class="messageTitle mb-2">
-                <span>{{item.sender.username}}</span>
+                <span>{{ item.sender.username }}</span>
                 <span>{{ formatDate(item.created) }}</span>
               </v-list-item-title>
-              <v-list-item-subtitle>{{item.text}}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ item.text }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </template>
@@ -48,41 +48,41 @@
 </style>
 
 <script>
-import Vue from 'vue'
-import {Component, Prop, Ref, Watch} from "@/lib/decorators";
-import {useStore} from "@/lib/store";
-import {formatDate} from "@/lib/formatDate";
+import Vue from 'vue';
+import { Component, Prop, Ref, Watch } from '@/lib/decorators';
+import { useStore } from '@/lib/store';
+import { formatDate } from '@/lib/formatDate';
 
 @Component
 class Room extends Vue {
   @Prop({ type: String, required: true })
-  id
+  id;
 
   @Ref('wrapper')
-  wrapper
+  wrapper;
 
-  room = useStore(this.$store).room
+  room = useStore(this.$store).room;
 
-  formatDate = formatDate
+  formatDate = formatDate;
 
   created() {
-    this.getHistory()
+    this.getHistory();
   }
 
   @Watch('id')
   getHistory() {
-    this.room.get(this.id)
+    this.room.get(this.id);
   }
 
   @Watch('room.history')
   scrollBottom() {
-      this.$nextTick(() => {
-        if (this.wrapper) {
-          this.wrapper.scrollTop = this.wrapper.scrollHeight
-        }
-      })
+    this.$nextTick(() => {
+      if (this.wrapper) {
+        this.wrapper.scrollTop = this.wrapper.scrollHeight;
+      }
+    });
   }
 }
 
-export default Room
+export default Room;
 </script>

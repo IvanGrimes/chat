@@ -21,21 +21,21 @@
 </style>
 
 <script>
-import Vue from 'vue'
-import {Component} from "@/lib/decorators";
-import RoomList from '@/components/RoomList'
-import RoomComponent from '@/components/Room'
-import SendMessage from '@/components/SendMessage'
-import {useStore} from "@/lib/store";
+import Vue from 'vue';
+import { Component } from '@/lib/decorators';
+import RoomList from '@/components/RoomList';
+import RoomComponent from '@/components/Room';
+import SendMessage from '@/components/SendMessage';
+import { useStore } from '@/lib/store';
 
 @Component({ components: { RoomList, RoomComponent, SendMessage } })
 class Room extends Vue {
-  user = useStore(this.$store).user
+  user = useStore(this.$store).user;
 
   get id() {
-    return this.$route.params.id
+    return this.$route.params.id;
   }
 }
 
-export default Room
+export default Room;
 </script>
