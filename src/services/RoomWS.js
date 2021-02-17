@@ -20,4 +20,10 @@ export class RoomWS {
 
     this.socket = new WS();
   }
+
+  setUsername(username) {
+    this.socket.setUrl(`wss://nane.tada.team/ws?username=${username}`)
+
+    return this
+  }
 }
