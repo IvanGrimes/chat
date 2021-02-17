@@ -10,13 +10,13 @@
               :rules="rules"
               placeholder="Введите ваше сообщение"
               height="120px"
-              :disabled="this.room.loading"
+              :disabled="disabled"
               full-width
               no-resize
             />
           </v-col>
           <v-col class="mb-5">
-            <v-btn type="submit" color="primary" :disabled="this.room.loading">Отправить</v-btn>
+            <v-btn type="submit" color="primary" :disabled="disabled">Отправить</v-btn>
           </v-col>
         </v-row>
       </v-form>
@@ -45,6 +45,10 @@ class SendMessage extends Vue {
   user = useStore(this.$store).user;
 
   config = useStore(this.$store).config;
+
+  get disabled() {
+    return this.room.loading || this.room.error
+  }
 
   get rules() {
     return [validation.required, validation.maxRoomNameLength(this.config.maxMessageLength)];

@@ -44,7 +44,7 @@ class UserNameInput extends Vue {
   name = '';
 
   get disabled() {
-    return this.room.loading || this.rooms.loading || this.room.error;
+    return this.room.loading || this.rooms.loading;
   }
 
   @Watch('form.errorBag')

@@ -71,7 +71,9 @@ class Room extends Vue {
 
   @Watch('id')
   getHistory() {
-    this.room.get(this.id);
+    if (!this.room.history.length) {
+      this.room.get(this.id);
+    }
   }
 
   @Watch('room.history')
