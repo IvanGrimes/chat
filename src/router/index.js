@@ -10,10 +10,15 @@ const routes = [
     component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
   },
   {
+    path: '/room/create',
+    name: 'CreateRoom',
+    component: () => import(/* webpackChunkName: "createRoom" */ '../views/CreateRoom')
+  },
+  {
     path: '/room/:id',
     name: 'Room',
     component: () => import(/* webpackChunkName: "room" */ '../views/Room')
-  }
+  },
 ]
 
 const router = new VueRouter({

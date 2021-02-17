@@ -28,6 +28,8 @@ class SendMessage extends Vue {
 
   sendMessage(ev) {
     this.room.sendMessage({ username: this.user.name, message: ev.target.elements.message.value })
+
+    ev.target.reset()
   }
 }
 

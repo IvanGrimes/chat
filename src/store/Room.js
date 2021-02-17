@@ -55,11 +55,11 @@ export class Room {
   }
 
   @Action()
-  sendMessage({ username, message }) {
+  sendMessage({ username, message, room }) {
     RoomWS
       .getInstance()
       .socket
       .setUrl(`wss://nane.tada.team/ws?username=${username}`)
-      .send({ text: message, room: this.id })
+      .send({ text: message, room: room || this.id })
   }
 }

@@ -5,16 +5,20 @@ import {RoomWS} from "@/services/RoomWS";
 export class Rooms {
   constructor() {
     RoomWS.getInstance().socket.on(data => {
-      this.updateList(this.list.map(item => {
-        if (item.name === data.room) {
-          return {
-            ...item,
-            lastMessage: data
+      if (this.list.some(item => item.name === data.room)) {
+        this.updateList(this.list.map(item => {
+          if (item.name === data.room) {
+            return {
+              ...item,
+              lastMessage: data
+            }
           }
-        }
 
-        return item
-      }))
+          return item
+        }))
+      } else {
+        this.updateList([{ name: data.room, lastMessage: data }, ...this.list])
+      }
     })
   }
 
