@@ -1,17 +1,13 @@
 <template>
   <div class="fill-height">
-    <room-component :class="user.name ? 'room' : 'roomGuest'" :id="id" />
+    <room-component class="room" :id="id" />
     <send-message :class="user.name && 'message'" :id="id" />
   </div>
 </template>
 
 <style scoped>
-.roomGuest {
-  height: calc(100% - 130px);
-}
-
 .room {
-  height: calc(100% - 190px);
+  height: calc(100% - 130px);
 }
 
 .message {

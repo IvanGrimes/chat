@@ -4,15 +4,13 @@
       <v-form v-if="user.name" ref="form" @submit.prevent="sendMessage" autocomplete="off">
         <v-row class="align-end flex-nowrap">
           <v-col class="flex-shrink-1" cols="12">
-            <v-textarea
+            <v-text-field
               name="message"
               v-model="message"
               :rules="rules"
               placeholder="Введите ваше сообщение"
-              height="120px"
               :disabled="disabled"
               full-width
-              no-resize
             />
           </v-col>
           <v-col class="mb-5">
